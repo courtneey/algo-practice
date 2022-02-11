@@ -16,7 +16,7 @@ don't form a peak because there aren't any strictly decreasing integers after th
 function longestPeak(array) {
   let peakLength = 0;
 
-  for (let i = 0; i < array.length; i++) {
+  for (let i = 1; i < array.length - 1; i++) {
     // check if current element is a peak
     if (array[i - 1] < array[i] && array[i + 1] < array[i]) {
       // if so, set pointers at both adjacent numbers
