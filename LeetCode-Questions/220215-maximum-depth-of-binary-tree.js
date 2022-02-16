@@ -9,10 +9,10 @@ A binary tree's maximum depth is the number of nodes along the longest path from
 function maxDepth(root) {
   if (!root) return 0;
 
-  return traverseTree(root, 0, 0);
+  return traverseTree(root);
 }
 
-function traverseTree(node, depth, max) {
+function traverseTree(node, depth = 0) {
   // traverse left branch until both children are null
   // for each node encountered, add 1 to depth
   // if depth > max, update max
@@ -26,8 +26,5 @@ function traverseTree(node, depth, max) {
   let leftDepth = traverseTree(node.left, depth + 1);
   let rightDepth = traverseTree(node.right, depth + 1);
 
-  max = leftDepth;
-  if (rightDepth > leftDepth) max = rightDepth;
-
-  return max;
+  return Math.max(leftDepth, rightDepth);
 }
