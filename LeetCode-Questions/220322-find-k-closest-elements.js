@@ -10,9 +10,6 @@ An integer a is closer to x than an integer b if:
 */
 
 function findClosestElements(arr, k, x) {
-  // create hash table to store distances between each num of arr and x
-  const distances = {};
-
   let result = [];
 
   // loop through input array
@@ -20,11 +17,7 @@ function findClosestElements(arr, k, x) {
     // compute distance between current number and x
     const current = arr[i];
     const currentDistance = Math.abs(current - x);
-
-    // add current distance to hash table if it doesn't exist
-    if (!distances[current]) {
-      distances[current] = currentDistance;
-    }
+    const firstDistance = Math.abs(result[0] - x);
 
     // if result array is not full, push current number and continue onto next iteration
     if (result.length < k) {
@@ -36,11 +29,11 @@ function findClosestElements(arr, k, x) {
     // or if they are equal and the current number is greater than the first element of result
     // in both cases, it means any subsequent numbers will only be further away from x, so return result
     if (
-      currentDistance > distances[result[0]] ||
-      (currentDistance === distances[result[0]] && current > result[0])
+      currentDistance > firstDistance ||
+      (currentDistance === firstDistance && current > result[0])
     ) {
       return result;
-    } else if (currentDistance < distances[result[0]]) {
+    } else if (currentDistance < firstDistance) {
       // otherwise, if the current distance is less than the first element of result, update result
       result = result.slice(1);
       result.push(current);
